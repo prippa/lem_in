@@ -1,29 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lem_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prippa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/18 14:19:59 by prippa            #+#    #+#             */
-/*   Updated: 2018/02/18 14:20:02 by prippa           ###   ########.fr       */
+/*   Created: 2018/02/18 14:21:59 by prippa            #+#    #+#             */
+/*   Updated: 2018/02/18 14:22:02 by prippa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	lem_init(t_lem_in *lem)
+static void	lem_sharp_valid(t_lem_in *lem)
 {
-	lem->rooms = NULL;
-	lem->start = NULL;
-	lem->end = NULL;
+	
 }
 
-int			main(int argc, char **argv)
+void		lem_parser(t_lem_in *lem)
 {
-	t_lem_in lem;
+	int		stage;
+	int		is_error;
 
-	lem_init(&lem);
-	lem_parser(&lem);
-	return (0);
+	lem->buf = NULL;
+	stage = 1;
+	while ((is_error = get_next_line(0, &lem->buf)) > 0)
+	{
+		if (lem->buf[0] == '#')
+			lem_sharp_valid(lem);
+		else if (stage == 1)
+		{
+
+		}
+		else if (stage == 2)
+		{
+
+		}
+		else if (stage == 3)
+		{
+
+		}
+		free(lem->buf);
+	}
+	if (is_error == -1)
+		lem_print_error("gnl returned -1", lem);
 }

@@ -46,7 +46,8 @@ C_LIBFT		=  ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c\
 			ft_strtrim.c ft_tolower.c ft_tostrlowercase.c ft_tostruppercase.c\
 			ft_toupper.c ft_itoa_base.c get_next_line.c\
 			ft_arr_free.c ft_arrlen.c ft_nbrlen.c\
-			ft_putarr.c ft_putarr_fd.c ft_atoi_base.c
+			ft_putarr.c ft_putarr_fd.c ft_atoi_base.c\
+			ft_clear.c
 
 C_FPF		= 	ft_pf_strjoin.c ft_charjoin.c\
 				ft_printf.c ft_dprintf.c\
@@ -58,7 +59,9 @@ C_FPF		= 	ft_pf_strjoin.c ft_charjoin.c\
 				ft_output_p_modul.c\
 				ft_fpf_color.c
 
-C_LEM		=	main.c
+C_LEM		=	main.c\
+				lem_parser.c lem_trash.c lem_free.c\
+
 
 
 
