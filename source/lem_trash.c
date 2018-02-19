@@ -12,7 +12,19 @@
 
 #include "lem_in.h"
 
-void		lem_print_error(char *error, t_lem_in *lem)
+void		lem_exit(char *error)
+{
+	ft_dprintf(2, "ERROR: %s\n", error);
+	exit(0);
+}
+
+void		lem_perror_exit(char *error)
+{
+	perror(error);
+	exit(0);
+}
+
+void		lem_free_exit(char *error, t_lem_in *lem)
 {
 	ft_dprintf(2, "ERROR: %s\n", error);
 	lem_free(lem);

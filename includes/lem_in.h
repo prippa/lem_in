@@ -19,6 +19,7 @@ typedef	struct		s_node
 	t_link 			*links;
 	int				x;
 	int				y;
+	struct s_node	*next;
 }					t_node;
 
 typedef	struct		s_lem_in
@@ -35,7 +36,14 @@ typedef	struct		s_lem_in
 }					t_lem_in;
 
 void				lem_parser(t_lem_in *lem);
+
 void				lem_free(t_lem_in *lem);
-void				lem_print_error(char *error, t_lem_in *lem);
+
+void				lem_exit(char *error);
+void				lem_perror_exit(char *error);
+void				lem_free_exit(char *error, t_lem_in *lem);
+
+void				lem_node_mem(t_node **room);
+void				lem_link_mem(t_link **link);
 
 #endif

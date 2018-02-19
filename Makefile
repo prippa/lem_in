@@ -27,6 +27,7 @@ HEAD_LEM	=	lem_in.h
 
 C_LEM		=	main.c\
 				lem_parser.c lem_trash.c lem_free.c\
+				lem_list.c
 
 
 OBJ_LEM 	= 	$(C_LEM:.c=.o)

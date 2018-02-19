@@ -12,29 +12,33 @@
 
 #include "lem_in.h"
 
-static void	lem_link_free(t_link *links)
+static void	lem_link_free(t_link **links)
 {
-	while (links)
+	while (*links)
 	{
-		free(links->name);
-		free(links);
-		links = links->next;
+		free((*links)->name);
+		free(*links);
+		*links = (*links)->next;
 	}
 }
 
-static void	lem_node_free(t_node *room)
+static void	lem_node_free(t_node **room)
 {
-	free(room->name);
-	lem_link_free(room->links);
-	free(room);
+	while (*room)
+	{
+		free((*room)->name);
+		lem_link_free(&((*room)->links));
+		free(*room);
+		*room = (*room)->next;
+	}
 }
 
 void		lem_free(t_lem_in *lem)
 {
 	if (lem->rooms)
-		lem_node_free(lem->rooms);
+		lem_node_free(&lem->rooms);
 	if (lem->start)
-		lem_node_free(lem->start);
+		lem_node_free(&lem->start);
 	if (lem->end)
-		lem_node_free(lem->end);
+		lem_node_free(&lem->end);
 }
