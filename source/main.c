@@ -12,45 +12,27 @@
 
 #include "lem_in.h"
 
-static void	lem_init(t_lem_in *lem)
+static void	lem_print_nodes(t_node *tmp)
 {
-	lem->rooms = NULL;
-	lem->start = NULL;
-	lem->end = NULL;
-}
-
-static void	lem_print_nodes(t_node room)
-{
-	t_node tmp;
-
-	tmp = room;
-	//ft_printf("%s\n", tmp.name);
-	while (tmp.links)
+	while (tmp)
 	{
-		ft_printf("\t%s\n", tmp.links->name);
-		tmp.links = tmp.links->next;
-	}
-	tmp = *tmp.next;
-	while (tmp.next)
-	{
-		tmp = *tmp.next;
-		//ft_printf("%s\n", tmp.name);
-		while (tmp.links)
+		ft_printf("name (%s), x (%d), y (%d)\n", tmp->name, tmp->x, tmp->y);
+		while (tmp->links)
 		{
-			ft_printf("\t%s\n", tmp.links->name);
-			tmp.links = tmp.links->next;
+			ft_printf("\t%s\n", tmp->links->name);
+			tmp->links = tmp->links->next;
 		}
+		tmp = tmp->next;
 	}
 }
 
 int			main(int argc, char **argv)
 {
 	t_lem_in lem;
-	t_node tmp;
 
 	lem_init(&lem);
 	lem_parser(&lem);
-	lem_print_nodes(*lem.rooms);
+	lem_print_nodes(lem.rooms);
 	lem_free(&lem);
 	system("leaks lem-in");
 	return (0);

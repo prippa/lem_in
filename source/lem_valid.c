@@ -1,40 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_free.c                                         :+:      :+:    :+:   */
+/*   lem_valid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prippa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/18 15:36:56 by prippa            #+#    #+#             */
-/*   Updated: 2018/02/18 15:37:03 by prippa           ###   ########.fr       */
+/*   Created: 2018/02/20 15:29:00 by prippa            #+#    #+#             */
+/*   Updated: 2018/02/20 15:29:01 by prippa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	lem_link_free(t_link **links)
+int			lem_is_links_stage(t_lem_in *lem)
 {
-	while (*links)
+	char **arr;
+
+	if (!(arr = ft_strsplit(lem->buf, '-')))
+		lem_perror_exit("malloc error");
+	if (ft_arrlen(arr) == 2)
 	{
-		free((*links)->name);
-		free(*links);
-		*links = (*links)->next;
+		lem->flag_stage = 3;
+		ft_arr_free(&arr);
+		return (1);
 	}
+	ft_arr_free(&arr);
+	return (0);	
 }
 
-static void	lem_node_free(t_node **room)
+void		lem_is_same_name(t_lem_in *lem, char *name)
 {
-	while (*room)
-	{
-		free((*room)->name);
-		lem_link_free(&((*room)->links));
-		free(*room);
-		*room = (*room)->next;
-	}
-}
+	t_node *tmp;
 
-void		lem_free(t_lem_in *lem)
-{
-	if (lem->rooms)
-		lem_node_free(&lem->rooms);
+	tmp = lem->rooms;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->name, name))
+			lem_free_exit("duplicate name", lem);
+		tmp = tmp->next;
+	}
 }

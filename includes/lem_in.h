@@ -30,10 +30,17 @@ typedef	struct		s_lem_in
 	t_node			*end;
 	int				flag_start;
 	int				flag_end;
+	int				flag_stage;
 	char			*buf;
 	int				i;
 	int				j;
 }					t_lem_in;
+
+void				lem_init(t_lem_in *lem);
+void				lem_init_start_end(t_lem_in *lem);
+
+int					lem_is_links_stage(t_lem_in *lem);
+void				lem_is_same_name(t_lem_in *lem, char *name);
 
 void				lem_parser(t_lem_in *lem);
 

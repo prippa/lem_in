@@ -5,7 +5,7 @@ void	lem_node_mem(t_node **room)
 	t_node *new;
 
 	if (!(new = (t_node *)malloc(sizeof(t_node))))
-		lem_perror_exit("t_node");
+		lem_perror_exit("malloc error");
 	new->name = NULL;
 	new->links = NULL;
 	new->x = 0;
@@ -19,7 +19,7 @@ void		lem_link_mem(t_link **link)
 	t_link *new;
 
 	if (!(new = (t_link *)malloc(sizeof(t_link))))
-		lem_perror_exit("t_link");
+		lem_perror_exit("malloc error");
 	new->name = NULL;
 	new->next = *link;
 	*link = new;
