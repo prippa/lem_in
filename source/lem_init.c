@@ -14,12 +14,14 @@
 
 void	lem_init(t_lem_in *lem)
 {
+	lem->ants = 0;
 	lem->rooms = NULL;
 	lem->start = NULL;
 	lem->end = NULL;
-	lem->ants = 0;
 	lem->flag_start = 0;
 	lem->flag_end = 0;
+	lem->flag_stage = 1;
+	lem->buf = NULL;
 }
 
 void	lem_init_start_end(t_lem_in *lem)

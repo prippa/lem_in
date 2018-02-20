@@ -32,6 +32,7 @@ int			main(int argc, char **argv)
 
 	lem_init(&lem);
 	lem_parser(&lem);
+	lem_node_reverse(&lem.rooms);
 	lem_print_nodes(lem.rooms);
 	lem_free(&lem);
 	system("leaks lem-in");

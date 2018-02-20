@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_clear()
+void	ft_clear(void)
 {
 	ft_putstr("\033[1J");
 	ft_putstr("\033[;H");
