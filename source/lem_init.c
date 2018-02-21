@@ -21,7 +21,9 @@ void	lem_init(t_lem_in *lem)
 	lem->flag_start = 0;
 	lem->flag_end = 0;
 	lem->flag_stage = 1;
+	lem->arr = NULL;
 	lem->buf = NULL;
+	lem->line_number = 1;
 }
 
 void	lem_init_start_end(t_lem_in *lem)

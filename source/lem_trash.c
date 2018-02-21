@@ -26,7 +26,8 @@ void		lem_perror_exit(char *error)
 
 void		lem_free_exit(char *error, t_lem_in *lem)
 {
-	ft_dprintf(2, "ERROR: %s\n", error);
+	ft_dprintf(2, "ERROR: %s. Line %d\n", error, lem->line_number);
+	system("leaks lem-in");
 	lem_free(lem);
 	exit(0);
 }

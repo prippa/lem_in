@@ -17,7 +17,7 @@ void		lem_node_mem(t_node **room)
 	t_node *new;
 
 	if (!(new = (t_node *)malloc(sizeof(t_node))))
-		lem_perror_exit("malloc error");
+		lem_perror_exit("ERROR");
 	new->name = NULL;
 	new->links = NULL;
 	new->x = 0;
@@ -31,7 +31,7 @@ void		lem_link_mem(t_link **link)
 	t_link *new;
 
 	if (!(new = (t_link *)malloc(sizeof(t_link))))
-		lem_perror_exit("malloc error");
+		lem_perror_exit("ERROR");
 	new->name = NULL;
 	new->next = *link;
 	*link = new;
@@ -53,4 +53,15 @@ void		lem_node_reverse(t_node **room)
 		current = next;
 	}
 	*room = prev;
+}
+
+t_node		*lem_get_node_by_name(t_node *rooms, char *name)
+{
+	while (rooms)
+	{
+		if (!ft_strcmp(rooms->name, name))
+			return (rooms);
+		rooms = rooms->next;
+	}
+	return (NULL);
 }

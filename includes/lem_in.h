@@ -43,7 +43,9 @@ typedef	struct		s_lem_in
 	int				flag_start;
 	int				flag_end;
 	int				flag_stage;
+	char			**arr;
 	char			*buf;
+	int				line_number;
 	int				i;
 	int				j;
 }					t_lem_in;
@@ -53,7 +55,7 @@ void				lem_init_start_end(t_lem_in *lem);
 
 void				lem_is_command(t_lem_in *lem);
 int					lem_is_links_stage(t_lem_in *lem);
-void				lem_is_same_name(t_lem_in *lem, char *name);
+void				lem_node_is_same_name_or_point(t_lem_in *lem);
 void				lem_is_same_link(t_lem_in *lem, t_link *links, char *name);
 
 void				lem_parser(t_lem_in *lem);
@@ -67,5 +69,6 @@ void				lem_free_exit(char *error, t_lem_in *lem);
 void				lem_node_mem(t_node **room);
 void				lem_link_mem(t_link **link);
 void				lem_node_reverse(t_node **room);
+t_node				*lem_get_node_by_name(t_node *rooms, char *name);
 
 #endif

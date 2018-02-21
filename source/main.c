@@ -14,13 +14,16 @@
 
 static void	lem_print_nodes(t_node *tmp)
 {
+	t_link *links;
+
 	while (tmp)
 	{
 		ft_printf("name (%s), x (%d), y (%d)\n", tmp->name, tmp->x, tmp->y);
-		while (tmp->links)
+		links = tmp->links;
+		while (links)
 		{
-			ft_printf("\t%s\n", tmp->links->name);
-			tmp->links = tmp->links->next;
+			ft_printf("\t%s\n", links->name);
+			links = links->next;
 		}
 		tmp = tmp->next;
 	}

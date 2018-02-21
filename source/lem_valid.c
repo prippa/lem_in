@@ -39,15 +39,18 @@ int			lem_is_links_stage(t_lem_in *lem)
 	return (0);
 }
 
-void		lem_is_same_name(t_lem_in *lem, char *name)
+void		lem_node_is_same_name_or_point(t_lem_in *lem)
 {
 	t_node *tmp;
+	t_node *new;
 
-	tmp = lem->rooms;
+	new = lem->rooms;
+	tmp = lem->rooms->next;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->name, name))
-			lem_free_exit("duplicate room name", lem);
+		if (!ft_strcmp(tmp->name, new->name)
+			|| (tmp->x == new->x && tmp->y == new->y))
+			lem_free_exit("duplicate room name or point x y", lem);
 		tmp = tmp->next;
 	}
 }

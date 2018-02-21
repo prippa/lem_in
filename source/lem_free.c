@@ -35,6 +35,7 @@ static void	lem_node_free(t_node **room)
 
 void		lem_free(t_lem_in *lem)
 {
+	ft_arr_free(&lem->arr);
 	if (lem->rooms)
 		lem_node_free(&lem->rooms);
 }
