@@ -25,9 +25,10 @@ DIR_OBJ		= 	./obj/
 
 HEAD_LEM	=	lem_in.h
 
-C_LEM		=	main.c lem_init.c lem_valid.c\
-				lem_parser.c lem_trash.c lem_free.c\
-				lem_list.c
+C_LEM		=	main.c lem_parser.c lem_algo.c\
+				lem_init.c lem_valid.c\
+				lem_trash.c lem_free.c\
+				lem_list_mem.c lem_list_operations.c
 
 
 OBJ_LEM 	= 	$(C_LEM:.c=.o)

@@ -39,7 +39,7 @@ int			lem_is_links_stage(t_lem_in *lem)
 	return (0);
 }
 
-void		lem_node_is_same_name_or_point(t_lem_in *lem)
+void		lem_is_duplicate_node(t_lem_in *lem)
 {
 	t_node *tmp;
 	t_node *new;
@@ -55,7 +55,7 @@ void		lem_node_is_same_name_or_point(t_lem_in *lem)
 	}
 }
 
-void		lem_is_same_link(t_lem_in *lem, t_link *links, char *name)
+void		lem_is_duplicate_link(t_lem_in *lem, t_link *links, char *name)
 {
 	while (links)
 	{

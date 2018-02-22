@@ -18,6 +18,7 @@ void	lem_init(t_lem_in *lem)
 	lem->rooms = NULL;
 	lem->start = NULL;
 	lem->end = NULL;
+	lem->paths = NULL;
 	lem->flag_start = 0;
 	lem->flag_end = 0;
 	lem->flag_stage = 1;

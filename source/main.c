@@ -12,21 +12,27 @@
 
 #include "lem_in.h"
 
-static void	lem_print_nodes(t_node *tmp)
+static void	lem_print_nodes(t_lem_in *lem)
 {
-	t_link *links;
+	t_node	*tmp;
+	t_link 	*links;
 
+	tmp = lem->rooms;
 	while (tmp)
 	{
-		ft_printf("name (%s), x (%d), y (%d)\n", tmp->name, tmp->x, tmp->y);
+		ft_printf("%s (x = %d y = %d)\n", tmp->name, tmp->x, tmp->y);
 		links = tmp->links;
 		while (links)
 		{
-			ft_printf("\t%s\n", links->name);
+			ft_printf("  %s\n", links->name);
 			links = links->next;
 		}
 		tmp = tmp->next;
 	}
+	ft_printf("\n\n");
+	ft_printf("##start\n  %s\n", lem->start->name);
+	ft_printf("##end\n  %s\n", lem->end->name);
+	ft_printf("\n\n");
 }
 
 int			main(int argc, char **argv)
@@ -35,9 +41,8 @@ int			main(int argc, char **argv)
 
 	lem_init(&lem);
 	lem_parser(&lem);
-	lem_node_reverse(&lem.rooms);
-	lem_print_nodes(lem.rooms);
-	lem_free(&lem);
+	lem_print_nodes(&lem);
 	system("leaks lem-in");
+	lem_free(&lem);
 	return (0);
 }

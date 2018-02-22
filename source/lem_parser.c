@@ -12,28 +12,12 @@
 
 #include "lem_in.h"
 
-static void	lem_get_links(t_lem_in *lem)
+static void	lem_get_ants(t_lem_in *lem)
 {
-	t_node	*link1;
-	t_node	*link2;
-
-	if (!(lem->arr = ft_strsplit(lem->buf, '-')))
-		lem_perror_exit("ERROR");
-	if (ft_arrlen(lem->arr) != 2 || !ft_strcmp(lem->arr[0], lem->arr[1]))
-		lem_free_exit("Invalid link", lem);
-	link1 = lem_get_node_by_name(lem->rooms, lem->arr[0]);
-	link2 = lem_get_node_by_name(lem->rooms, lem->arr[1]);
-	if (!link1 || !link2)
-		lem_free_exit("Invalid link (not exist room name)", lem);
-	lem_is_same_link(lem, link1->links, lem->arr[0]);
-	lem_is_same_link(lem, link2->links, lem->arr[1]);
-	lem_link_mem(&link1->links);
-	lem_link_mem(&link2->links);
-	if (!(link1->links->name = ft_strdup(lem->arr[1])))
-		lem_perror_exit("ERROR");
-	if (!(link2->links->name = ft_strdup(lem->arr[0])))
-		lem_perror_exit("ERROR");
-	ft_arr_free(&lem->arr);
+	lem->ants = ft_atoi(lem->buf);
+	if (!lem->ants)
+		lem_free_exit("No ants", lem);
+	lem->flag_stage = 2;
 }
 
 static void	lem_get_rooms(t_lem_in *lem)
@@ -49,17 +33,33 @@ static void	lem_get_rooms(t_lem_in *lem)
 		lem_perror_exit("ERROR");
 	lem->rooms->x = ft_atoi(lem->arr[1]);
 	lem->rooms->y = ft_atoi(lem->arr[2]);
-	lem_node_is_same_name_or_point(lem);
+	lem_is_duplicate_node(lem);
 	lem_init_start_end(lem);
 	ft_arr_free(&lem->arr);
 }
 
-static void	lem_get_ants(t_lem_in *lem)
+static void	lem_get_links(t_lem_in *lem)
 {
-	lem->ants = ft_atoi(lem->buf);
-	if (!lem->ants)
-		lem_free_exit("No ants", lem);
-	lem->flag_stage = 2;
+	t_node	*link1;
+	t_node	*link2;
+
+	if (!(lem->arr = ft_strsplit(lem->buf, '-')))
+		lem_perror_exit("ERROR");
+	if (ft_arrlen(lem->arr) != 2 || !ft_strcmp(lem->arr[0], lem->arr[1]))
+		lem_free_exit("Invalid link", lem);
+	link1 = lem_get_node_by_name(lem->rooms, lem->arr[0]);
+	link2 = lem_get_node_by_name(lem->rooms, lem->arr[1]);
+	if (!link1 || !link2)
+		lem_free_exit("Invalid link (not exist room name)", lem);
+	lem_is_duplicate_link(lem, link2->links, lem->arr[0]);
+	lem_is_duplicate_link(lem, link1->links, lem->arr[1]);
+	lem_link_mem(&link1->links);
+	lem_link_mem(&link2->links);
+	if (!(link1->links->name = ft_strdup(lem->arr[1])))
+		lem_perror_exit("ERROR");
+	if (!(link2->links->name = ft_strdup(lem->arr[0])))
+		lem_perror_exit("ERROR");
+	ft_arr_free(&lem->arr);
 }
 
 static int	lem_dispatcher(t_lem_in *lem)
@@ -96,7 +96,7 @@ void		lem_parser(t_lem_in *lem)
 	if (is_error == -1)
 		lem_perror_exit("ERROR");
 	if (!lem->start)
-		lem_free_exit("No start", lem);
+		lem_free_noline_exit("No start", lem);
 	if (!lem->end)
-		lem_free_exit("No end", lem);
+		lem_free_noline_exit("No end", lem);
 }
