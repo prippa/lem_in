@@ -58,7 +58,8 @@ typedef	struct		s_lem_in
 	int				j;
 }					t_lem_in;
 
-void				lem_algo(t_lem_in *lem);
+void				lem_get_paths(t_lem_in *lem);
+void				lem_push_ants(t_lem_in *lem);
 
 void				lem_init(t_lem_in *lem);
 void				lem_init_start_end(t_lem_in *lem);

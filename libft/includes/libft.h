@@ -110,6 +110,7 @@ char				*ft_itoa_base(unsigned long long int num,
 					int base, int letter);
 size_t				ft_arrlen(char **arr);
 void				ft_arr_free(char ***arr);
+void				ft_str_free(char **str);
 int					ft_nbrlen(long long int nb);
 void				ft_putarr(char **arr);
 void				ft_putarr_fd(char **arr, int fd);

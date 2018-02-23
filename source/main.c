@@ -41,8 +41,10 @@ int			main(int argc, char **argv)
 
 	lem_init(&lem);
 	lem_parser(&lem);
+	lem_get_paths(&lem);
+	lem_push_ants(&lem);
 	lem_print_nodes(&lem);
-	system("leaks lem-in");
 	lem_free(&lem);
+	system("leaks lem-in");
 	return (0);
 }

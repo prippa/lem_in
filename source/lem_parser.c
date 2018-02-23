@@ -86,12 +86,9 @@ void		lem_parser(t_lem_in *lem)
 	while ((is_error = get_next_line(0, &lem->buf)) > 0)
 	{
 		if (!lem_dispatcher(lem))
-		{
-			free(lem->buf);
 			break ;
-		}
 		lem->line_number++;
-		free(lem->buf);
+		ft_str_free(&lem->buf);
 	}
 	if (is_error == -1)
 		lem_perror_exit("ERROR");

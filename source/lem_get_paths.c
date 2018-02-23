@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_trash.c                                        :+:      :+:    :+:   */
+/*   lem_get_paths.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prippa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/18 16:49:33 by prippa            #+#    #+#             */
-/*   Updated: 2018/02/18 16:49:37 by prippa           ###   ########.fr       */
+/*   Created: 2018/02/23 13:02:25 by prippa            #+#    #+#             */
+/*   Updated: 2018/02/23 13:02:27 by prippa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void		lem_perror_exit(char *error)
+void		lem_get_paths(t_lem_in *lem)
 {
-	perror(error);
-	exit(0);
-}
-
-void		lem_free_exit(char *error, t_lem_in *lem)
-{
-	ft_dprintf(2, "ERROR: %s. Line %d\n", error, lem->line_number);
-	lem_free(lem);
-	system("leaks lem-in");
-	exit(0);
-}
-
-void		lem_free_noline_exit(char *error, t_lem_in *lem)
-{
-	ft_dprintf(2, "ERROR: %s\n", error);
-	lem_free(lem);
-	system("leaks lem-in");
-	exit(0);
+	
 }

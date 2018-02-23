@@ -16,7 +16,7 @@ static void	lem_link_free(t_link **links)
 {
 	while (*links)
 	{
-		free((*links)->name);
+		ft_str_free(&(*links)->name);
 		free(*links);
 		*links = (*links)->next;
 	}
@@ -26,16 +26,29 @@ static void	lem_node_free(t_node **room)
 {
 	while (*room)
 	{
-		free((*room)->name);
+		ft_str_free(&(*room)->name);
 		lem_link_free(&((*room)->links));
 		free(*room);
 		*room = (*room)->next;
 	}
 }
 
+static void	lem_paths_free(t_paths **path)
+{
+	while (*path)
+	{
+		lem_link_free(&((*path)->links));
+		free(*path);
+		*path = (*path)->next;
+	}
+}
+
 void		lem_free(t_lem_in *lem)
 {
+	ft_str_free(&lem->buf);
 	ft_arr_free(&lem->arr);
 	if (lem->rooms)
 		lem_node_free(&lem->rooms);
+	if (lem->paths)
+		lem_paths_free(&lem->paths);
 }
