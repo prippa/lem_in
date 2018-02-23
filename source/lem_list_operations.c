@@ -40,3 +40,25 @@ t_node		*lem_get_node_by_name(t_node *rooms, char *name)
 	}
 	return (NULL);
 }
+
+t_link		*lem_get_close_link_to_end(t_node *end, t_link *links)
+{
+	t_link	*close_in;
+	int		sum;
+	int		tmp;
+
+	close_in = links;
+	sum = ABS(end->x - links->x) + ABS(end->y - links->y);
+	links = links->next;
+	while (links)
+	{
+		tmp = ABS(end->x - links->x) + ABS(end->y - links->y);
+		if (tmp < sum)
+		{
+			sum = tmp;
+			close_in = links;
+		}
+		links = links->next;
+	}
+	return (close_in);
+}

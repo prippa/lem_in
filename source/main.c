@@ -16,17 +16,19 @@ static void	lem_print_nodes(t_lem_in *lem)
 {
 	t_node	*tmp;
 	t_link 	*links;
+	t_link 	*close_in;
 
 	tmp = lem->rooms;
 	while (tmp)
 	{
 		ft_printf("%s (x = %d y = %d)\n", tmp->name, tmp->x, tmp->y);
 		links = tmp->links;
-		while (links)
-		{
-			ft_printf("  %s\n", links->name);
-			links = links->next;
-		}
+		// while (links)
+		// {
+			close_in = lem_get_close_link_to_end(lem->end, links);
+			ft_printf("  close_in = %s (x = %d y = %d)\n", close_in->name, close_in->x, close_in->y);
+		// 	links = links->next;
+		// }
 		tmp = tmp->next;
 	}
 	ft_printf("\n\n");

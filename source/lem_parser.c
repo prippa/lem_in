@@ -26,7 +26,7 @@ static void	lem_get_rooms(t_lem_in *lem)
 		lem_perror_exit("ERROR");
 	if (ft_arrlen(lem->arr) != 3
 		|| !ft_isdigit(lem->arr[1][0]) || !ft_isdigit(lem->arr[2][0])
-		|| lem->arr[0][0] == 'L')
+		|| lem->arr[0][0] == 'L' || lem->arr[0][0] == '-')
 		lem_free_exit("Invalid room", lem);
 	lem_node_mem(&lem->rooms);
 	if (!(lem->rooms->name = ft_strdup(lem->arr[0])))
@@ -55,10 +55,13 @@ static void	lem_get_links(t_lem_in *lem)
 	lem_is_duplicate_link(lem, link1->links, lem->arr[1]);
 	lem_link_mem(&link1->links);
 	lem_link_mem(&link2->links);
-	if (!(link1->links->name = ft_strdup(lem->arr[1])))
+	if (!(link1->links->name = ft_strdup(link2->name))
+		|| !(link2->links->name = ft_strdup(link1->name)))
 		lem_perror_exit("ERROR");
-	if (!(link2->links->name = ft_strdup(lem->arr[0])))
-		lem_perror_exit("ERROR");
+	link1->links->x = link2->x;
+	link1->links->y = link2->y;
+	link2->links->x = link1->x;
+	link2->links->y = link1->y;
 	ft_arr_free(&lem->arr);
 }
 

@@ -22,6 +22,8 @@
 typedef	struct		s_link
 {
 	char			*name;
+	int				x;
+	int				y;
 	struct s_link	*next;
 }					t_link;
 
@@ -48,6 +50,7 @@ typedef	struct		s_lem_in
 	t_node			*start;
 	t_node			*end;
 	t_path			*paths;
+	t_link			*black_list;
 	int				flag_start;
 	int				flag_end;
 	int				flag_stage;
@@ -84,5 +87,6 @@ void				lem_path_mem(t_path **path);
 
 void				lem_node_reverse(t_node **room);
 t_node				*lem_get_node_by_name(t_node *rooms, char *name);
+t_link				*lem_get_close_link_to_end(t_node *end, t_link *links);
 
 #endif

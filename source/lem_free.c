@@ -33,7 +33,7 @@ static void	lem_node_free(t_node **room)
 	}
 }
 
-static void	lem_paths_free(t_paths **path)
+static void	lem_paths_free(t_path **path)
 {
 	while (*path)
 	{
@@ -51,4 +51,6 @@ void		lem_free(t_lem_in *lem)
 		lem_node_free(&lem->rooms);
 	if (lem->paths)
 		lem_paths_free(&lem->paths);
+	if (lem->black_list)
+		lem_link_free(&lem->black_list);
 }
