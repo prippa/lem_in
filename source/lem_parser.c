@@ -14,8 +14,8 @@
 
 static void	lem_get_ants(t_lem_in *lem)
 {
-	lem->ants = ft_atoi(lem->buf);
-	if (!lem->ants)
+	lem->ants_count = ft_atoi(lem->buf);
+	if (!lem->ants_count)
 		lem_free_exit("No ants", lem);
 	lem->flag_stage = 2;
 }
@@ -84,6 +84,7 @@ void		lem_parser(t_lem_in *lem)
 		if (!lem_dispatcher(lem))
 			break ;
 		lem->line_number++;
+		ft_putendl(lem->buf);
 		ft_str_free(&lem->buf);
 	}
 	if (is_error == -1)
@@ -92,4 +93,5 @@ void		lem_parser(t_lem_in *lem)
 		lem_free_noline_exit("No start", lem);
 	if (!lem->end)
 		lem_free_noline_exit("No end", lem);
+	ft_putchar('\n');
 }

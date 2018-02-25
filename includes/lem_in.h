@@ -16,14 +16,12 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-# define			Y lem->i
-# define			X lem->j
-
 typedef	struct		s_link
 {
 	char			*name;
 	int				x;
 	int				y;
+	int 			ant;
 	struct s_link	*next;
 }					t_link;
 
@@ -46,6 +44,7 @@ typedef	struct		s_node
 typedef	struct		s_lem_in
 {
 	int				ants;
+	int				ants_count;
 	t_node			*rooms;
 	t_node			*start;
 	t_node			*end;
@@ -58,12 +57,10 @@ typedef	struct		s_lem_in
 	char			**arr;
 	char			*buf;
 	int				line_number;
-	int				i;
-	int				j;
 }					t_lem_in;
 
 void				lem_get_paths(t_lem_in *lem);
-void				lem_push_ants(t_lem_in *lem);
+void				lem_print_ants_travel(t_lem_in *lem);
 
 void				lem_init(t_lem_in *lem);
 void				lem_init_start_end(t_lem_in *lem);
@@ -87,6 +84,7 @@ void				lem_free_noline_exit(char *error, t_lem_in *lem);
 void				lem_node_mem(t_node **room);
 void				lem_link_mem(t_link **link);
 void				lem_path_mem(t_path **path);
+t_link				*lem_get_static_links(t_path *paths, int size);
 void				lem_link_add(t_link **links, char *name, int x, int y);
 
 void				lem_paths_sort(t_path **paths);

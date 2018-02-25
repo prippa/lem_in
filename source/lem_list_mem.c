@@ -35,6 +35,7 @@ void		lem_link_mem(t_link **link)
 	new->name = NULL;
 	new->x = 0;
 	new->y = 0;
+	new->ant = 0;
 	new->next = *link;
 	*link = new;
 }
@@ -49,6 +50,32 @@ void		lem_path_mem(t_path **path)
 	new->links = NULL;
 	new->next = *path;
 	*path = new;
+}
+
+t_link		*lem_get_static_links(t_path *paths, int size)
+{
+	t_link	*links;
+	t_link	*fresh;
+	int		i;
+
+	if (!(fresh = (t_link *)malloc(sizeof(t_link) * size)))
+		lem_perror_exit("ERROR");
+	i = 0;
+	while (paths)
+	{
+		links = paths->links;
+		while (links)
+		{
+			if (links->ant)
+			{
+				fresh[i] = *links;
+				i++;
+			}
+			links = links->next;
+		}
+		paths = paths->next;
+	}
+	return (fresh);
 }
 
 void		lem_link_add(t_link **links, char *name, int x, int y)

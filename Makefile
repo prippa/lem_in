@@ -26,7 +26,7 @@ DIR_OBJ		= 	./obj/
 HEAD_LEM	=	lem_in.h
 
 C_LEM		=	main.c lem_init.c lem_parser.c\
-				lem_get_paths.c lem_push_ants.c\
+				lem_get_paths.c lem_print_ants_travel.c\
 				lem_valid.c\
 				lem_trash.c lem_free.c\
 				lem_list_mem.c lem_list_operations.c

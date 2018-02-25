@@ -38,13 +38,13 @@ void		lem_paths_sort(t_path **paths)
 		temp_paths = temp_paths->next;
 		len++;
 	}
-	while (--len <= 0)
+	while (--len >= 0)
 	{
 		temp_paths = *paths;
 		temp_paths_next = temp_paths->next;
 		while (temp_paths_next)
 		{
-			if (temp_paths_next->count_steps > temp_paths->count_steps)
+			if (temp_paths_next->count_steps < temp_paths->count_steps)
 				len_paths_swap(&temp_paths, &temp_paths_next);
 			temp_paths = temp_paths->next;
 			temp_paths_next = temp_paths_next->next;
