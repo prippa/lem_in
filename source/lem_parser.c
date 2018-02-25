@@ -53,15 +53,8 @@ static void	lem_get_links(t_lem_in *lem)
 		lem_free_exit("Invalid link (not exist room name)", lem);
 	lem_is_duplicate_link(lem, link2->links, lem->arr[0]);
 	lem_is_duplicate_link(lem, link1->links, lem->arr[1]);
-	lem_link_mem(&link1->links);
-	lem_link_mem(&link2->links);
-	if (!(link1->links->name = ft_strdup(link2->name))
-		|| !(link2->links->name = ft_strdup(link1->name)))
-		lem_perror_exit("ERROR");
-	link1->links->x = link2->x;
-	link1->links->y = link2->y;
-	link2->links->x = link1->x;
-	link2->links->y = link1->y;
+	lem_link_add(&link1->links, link2->name, link2->x, link2->y);
+	lem_link_add(&link2->links, link1->name, link1->x, link1->y);
 	ft_arr_free(&lem->arr);
 }
 

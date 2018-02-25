@@ -50,6 +50,7 @@ typedef	struct		s_lem_in
 	t_node			*start;
 	t_node			*end;
 	t_path			*paths;
+	t_link			*path;
 	t_link			*black_list;
 	int				flag_start;
 	int				flag_end;
@@ -72,10 +73,12 @@ int					lem_is_links_stage(t_lem_in *lem);
 void				lem_is_duplicate_node(t_lem_in *lem);
 void				lem_is_duplicate_link(t_lem_in *lem,
 					t_link *links, char *name);
+int					lem_is_green_list(t_link *link, t_link *list);
 
 void				lem_parser(t_lem_in *lem);
 
 void				lem_free(t_lem_in *lem);
+void				lem_link_free(t_link **links);
 
 void				lem_perror_exit(char *error);
 void				lem_free_exit(char *error, t_lem_in *lem);
@@ -84,9 +87,11 @@ void				lem_free_noline_exit(char *error, t_lem_in *lem);
 void				lem_node_mem(t_node **room);
 void				lem_link_mem(t_link **link);
 void				lem_path_mem(t_path **path);
+void				lem_link_add(t_link **links, char *name, int x, int y);
 
-void				lem_node_reverse(t_node **room);
+void				lem_paths_sort(t_path **paths);
+void				lem_links_reverse(t_link **links);
 t_node				*lem_get_node_by_name(t_node *rooms, char *name);
-t_link				*lem_get_close_link_to_end(t_node *end, t_link *links);
+t_node				*lem_get_close_node_to_end(t_lem_in *lem, t_link *links);
 
 #endif

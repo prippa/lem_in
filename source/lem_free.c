@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-static void	lem_link_free(t_link **links)
+void		lem_link_free(t_link **links)
 {
 	while (*links)
 	{
@@ -51,6 +51,8 @@ void		lem_free(t_lem_in *lem)
 		lem_node_free(&lem->rooms);
 	if (lem->paths)
 		lem_paths_free(&lem->paths);
+	if (lem->path)
+		lem_link_free(&lem->path);
 	if (lem->black_list)
 		lem_link_free(&lem->black_list);
 }

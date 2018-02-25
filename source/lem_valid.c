@@ -64,3 +64,14 @@ void		lem_is_duplicate_link(t_lem_in *lem, t_link *links, char *name)
 		links = links->next;
 	}
 }
+
+int			lem_is_green_list(t_link *link, t_link *list)
+{
+	while (list)
+	{
+		if (!ft_strcmp(link->name, list->name))
+			return (0);
+		list = list->next;
+	}
+	return (1);
+}

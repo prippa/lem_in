@@ -33,6 +33,8 @@ void		lem_link_mem(t_link **link)
 	if (!(new = (t_link *)malloc(sizeof(t_link))))
 		lem_perror_exit("ERROR");
 	new->name = NULL;
+	new->x = 0;
+	new->y = 0;
 	new->next = *link;
 	*link = new;
 }
@@ -47,4 +49,13 @@ void		lem_path_mem(t_path **path)
 	new->links = NULL;
 	new->next = *path;
 	*path = new;
+}
+
+void		lem_link_add(t_link **links, char *name, int x, int y)
+{
+	lem_link_mem(&(*links));
+	if (!((*links)->name = ft_strdup(name)))
+		lem_perror_exit("ERROR");
+	(*links)->x = x;
+	(*links)->y = y;
 }
