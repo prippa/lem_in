@@ -16,13 +16,14 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-# define FLAG_SIZE				5
+# define FLAG_SIZE				6
 
 # define F_VISUALIZE			0
 # define F_DEBUG_ANT_STATUS 	1
 # define F_DEBUG_ALL_PATHS 		2
-# define F_DEBUG_COUNT_STEPS	3
-# define F_DEBUG_COUNT_NODE		4
+# define F_DEBUG_SHORT_PATH 	3
+# define F_DEBUG_COUNT_STEPS	4
+# define F_DEBUG_COUNT_NODE		5
 
 typedef	struct		s_link
 {
@@ -63,6 +64,7 @@ typedef	struct		s_lem_in
 	int				ants;
 	int				ants_count;
 	int				end_ants;
+	int				way_ants;
 	int				count_node;
 	int				count_steps;
 	t_node			*rooms;

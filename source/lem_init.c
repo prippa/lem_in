@@ -26,6 +26,7 @@ void	lem_init(t_lem_in *lem)
 	lem->ants = 1;
 	lem->ants_count = 0;
 	lem->end_ants = 0;
+	lem->way_ants = 0;
 	lem->count_node = 0;
 	lem->count_steps = 0;
 	lem->rooms = NULL;

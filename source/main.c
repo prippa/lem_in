@@ -19,19 +19,22 @@ void		lem_get_bonus_flags(t_lem_in *lem, char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		if (!ft_strcmp(argv[i], "-v"))
-			lem->flags[F_VISUALIZE] = 'v';
-		else if (!ft_strcmp(argv[i], "-p"))
-			lem->flags[F_DEBUG_ALL_PATHS] = 'p';
-		else if (!ft_strcmp(argv[i], "-d"))
-			lem->flags[F_DEBUG_ANT_STATUS] = 'd';
-		else if (!ft_strcmp(argv[i], "-s"))
-			lem->flags[F_DEBUG_COUNT_STEPS] = 's';
-		else if (!ft_strcmp(argv[i], "-n"))
-			lem->flags[F_DEBUG_COUNT_NODE] = 'n';
+		if (!ft_strcmp(argv[i], "-visu"))
+			lem->flags[F_VISUALIZE] = '$';
+		else if (!ft_strcmp(argv[i], "-paths"))
+			lem->flags[F_DEBUG_ALL_PATHS] = '$';
+		else if (!ft_strcmp(argv[i], "-loc"))
+			lem->flags[F_DEBUG_ANT_STATUS] = '$';
+		else if (!ft_strcmp(argv[i], "-step"))
+			lem->flags[F_DEBUG_COUNT_STEPS] = '$';
+		else if (!ft_strcmp(argv[i], "-rooms"))
+			lem->flags[F_DEBUG_COUNT_NODE] = '$';
+		else if (!ft_strcmp(argv[i], "-path"))
+			lem->flags[F_DEBUG_SHORT_PATH] = '$';
 		else
 		{
-			ft_putstr_fd("ERROR: Invalid flag\nUsage: [-v -p -d -s -n]\n", 2);
+			ft_putstr_fd("ERROR: Invalid flag\n", 2);
+			ft_putstr_fd("usage: [-visu -paths -path -loc -step -rooms]\n", 2);
 			exit(0);
 		}
 		i++;

@@ -15,19 +15,9 @@
 #define Y lem->vis.i
 #define X lem->vis.j
 
-void		lem_vis_fill_board(t_lem_in *lem)
+void		lem_vis_fill_board2(t_lem_in *lem, t_path *paths, t_link *links)
 {
-	t_node	*node;
-	t_path	*paths;
-	t_link	*links;
-
-	node = lem->rooms;
-	while (node)
-	{
-		lem->vis.board[node->y][node->x] = node->name[0];
-		node = node->next;
-	}
-	paths = lem->paths;
+	lem->way_ants = 0;
 	while (paths)
 	{
 		links = paths->links;
@@ -35,13 +25,34 @@ void		lem_vis_fill_board(t_lem_in *lem)
 		{
 			if (links->ant)
 			{
-				lem->vis.board[links->y][links->x] = 'A';
-				lem->flag_end = 1;
+				if (links->x == lem->end->x && links->y == lem->end->y)
+					lem->end_ants++;
+				else
+				{
+					lem->way_ants++;
+					lem->flag_end = 1;
+				}
+				lem->vis.board[links->y][links->x] = (links->ant - 1 % 26) + 65;
 			}
 			links = links->next;
 		}
 		paths = paths->next;
 	}
+}
+
+void		lem_vis_fill_board(t_lem_in *lem)
+{
+	t_node	*node;
+
+	node = lem->rooms;
+	while (node)
+	{
+		lem->vis.board[node->y][node->x] = '*';
+		node = node->next;
+	}
+	lem_vis_fill_board2(lem, lem->paths, NULL);
+	lem->vis.board[lem->start->y][lem->start->x] = '!';
+	lem->vis.board[lem->end->y][lem->end->x] = '?';
 }
 
 void		lem_vis_print_board(t_lem_in *lem)
@@ -52,22 +63,25 @@ void		lem_vis_print_board(t_lem_in *lem)
 		X = 0;
 		while (lem->vis.board[Y][X])
 		{
-			if (lem->vis.board[Y][X] == 'A')
-			{
-				if (Y == lem->end->y && X == lem->end->x)
-					lem->end_ants++;
-				ft_printf("%~c", F_RED, lem->vis.board[Y][X]);
-			}
+			if (ft_isuppercase(lem->vis.board[Y][X]))
+				ft_printf("%~c", lem->vis.board[Y][X] % 5, lem->vis.board[Y][X]);
 			else if (lem->vis.board[Y][X] == '.')
 				ft_putchar(' ');
+			else if (lem->vis.board[Y][X] == '!')
+				ft_printf("%~c", F_YELLOW, lem->vis.board[Y][X]);
+			else if (lem->vis.board[Y][X] == '?')
+				ft_printf("%~c", F_RED, lem->vis.board[Y][X]);
 			else
-				ft_printf("%~c", F_BLUE, lem->vis.board[Y][X]);
+				ft_printf("%c", lem->vis.board[Y][X]);
 			X++;
 		}
 		ft_putchar('\n');
-		//printf("%d\n", lem->end_ants);
 		Y++;
 	}
+	if (lem->flags[F_DEBUG_ANT_STATUS])
+		ft_printf("\nAnts location:\nstart [%d] - way [%d] - end [%d]\n",
+		lem->ants_count - (lem->way_ants + lem->end_ants),
+		lem->way_ants, lem->end_ants);
 }
 
 void		lem_vis_board_mem(t_lem_in *lem)
