@@ -36,6 +36,7 @@ static void	lem_get_rooms(t_lem_in *lem)
 	lem_is_duplicate_node(lem);
 	lem_init_start_end(lem);
 	ft_arr_free(&lem->arr);
+	lem->count_node++;
 }
 
 static void	lem_get_links(t_lem_in *lem)
@@ -63,7 +64,10 @@ static int	lem_dispatcher(t_lem_in *lem)
 	if (!ft_strcmp(lem->buf, ""))
 		return (0);
 	else if (lem->buf[0] == '#' && lem->buf[1] == '#')
-		lem_is_command(lem);
+	{
+		if (!(lem_is_command(lem)))
+			return (1);
+	}
 	else if (lem->buf[0] == '#')
 		return (1);
 	else if (lem->flag_stage == 1)
@@ -72,6 +76,7 @@ static int	lem_dispatcher(t_lem_in *lem)
 		lem_get_rooms(lem);
 	else if (lem->flag_stage == 3)
 		lem_get_links(lem);
+	ft_putendl(lem->buf);
 	return (1);
 }
 
@@ -84,7 +89,6 @@ void		lem_parser(t_lem_in *lem)
 		if (!lem_dispatcher(lem))
 			break ;
 		lem->line_number++;
-		ft_putendl(lem->buf);
 		ft_str_free(&lem->buf);
 	}
 	if (is_error == -1)

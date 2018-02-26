@@ -47,6 +47,7 @@ void		lem_free(t_lem_in *lem)
 {
 	ft_str_free(&lem->buf);
 	ft_arr_free(&lem->arr);
+	ft_arr_free(&lem->vis.board);
 	if (lem->rooms)
 		lem_node_free(&lem->rooms);
 	if (lem->paths)

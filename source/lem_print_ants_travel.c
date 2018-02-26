@@ -12,33 +12,6 @@
 
 #include "lem_in.h"
 
-static void	lem_push_ants(t_lem_in *lem)
-{
-	t_path	*temp_paths;
-	t_link	*temp_links;
-	int		pull;
-	int		tmp;
-
-	temp_paths = lem->paths;
-	while (temp_paths)
-	{
-		temp_links = temp_paths->links;
-		pull = lem->ants;
-		while (temp_links)
-		{
-			tmp = temp_links->ant;
-			temp_links->ant = pull;
-			pull = tmp;
-			temp_links = temp_links->next;
-		}
-		temp_paths = temp_paths->next;
-		if (lem->ants == lem->ants_count)
-			lem->ants = 0;
-		else if (lem->ants)
-			lem->ants++;
-	}
-}
-
 static void	lem_sort_static_links(t_link **static_links, int len)
 {
 	t_link	tmp;
@@ -82,6 +55,8 @@ static void	lem_print_ants(t_lem_in *lem, int len)
 		lem->flag_start = 1;
 		i++;
 	}
+	if (lem->flag_start)
+		ft_putchar('\n');
 	free(static_links);
 }
 
@@ -106,18 +81,22 @@ static int	lem_print_step(t_lem_in *lem)
 		temp_paths = temp_paths->next;
 	}
 	lem_print_ants(lem, len);
-	if (lem->flag_start)
-		ft_putchar('\n');
 	return (lem->flag_start);
 }
 
 void		lem_print_ants_travel(t_lem_in *lem)
 {
-	lem->ants = 1;
 	while (1)
 	{
 		lem_push_ants(lem);
-		if (!(lem_print_step(lem)))
-			return ;
+		if (lem->flags[F_VISUALIZE])
+		{
+			if (!(lem_visualizer(lem)))
+				break ;
+		}
+		else if (!(lem_print_step(lem)))
+			break ;
+		lem->count_steps++;
 	}
+	lem_debuger(lem);
 }

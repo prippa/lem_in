@@ -16,6 +16,14 @@
 # include "libft.h"
 # include "ft_printf.h"
 
+# define FLAG_SIZE				5
+
+# define F_VISUALIZE			0
+# define F_DEBUG_ANT_STATUS 	1
+# define F_DEBUG_ALL_PATHS 		2
+# define F_DEBUG_COUNT_STEPS	3
+# define F_DEBUG_COUNT_NODE		4
+
 typedef	struct		s_link
 {
 	char			*name;
@@ -41,10 +49,22 @@ typedef	struct		s_node
 	struct s_node	*next;
 }					t_node;
 
+typedef	struct		s_visualizer
+{
+	char			**board;
+	int				y;
+	int				x;
+	int				i;
+	int				j;
+}					t_visualizer;
+
 typedef	struct		s_lem_in
 {
 	int				ants;
 	int				ants_count;
+	int				end_ants;
+	int				count_node;
+	int				count_steps;
 	t_node			*rooms;
 	t_node			*start;
 	t_node			*end;
@@ -56,8 +76,13 @@ typedef	struct		s_lem_in
 	int				flag_stage;
 	char			**arr;
 	char			*buf;
+	char			flags[FLAG_SIZE];
 	int				line_number;
+	t_visualizer 	vis;
 }					t_lem_in;
+
+int					lem_visualizer(t_lem_in *lem);
+void				lem_debuger(t_lem_in *lem);
 
 void				lem_get_paths(t_lem_in *lem);
 void				lem_print_ants_travel(t_lem_in *lem);
@@ -65,7 +90,7 @@ void				lem_print_ants_travel(t_lem_in *lem);
 void				lem_init(t_lem_in *lem);
 void				lem_init_start_end(t_lem_in *lem);
 
-void				lem_is_command(t_lem_in *lem);
+int					lem_is_command(t_lem_in *lem);
 int					lem_is_links_stage(t_lem_in *lem);
 void				lem_is_duplicate_node(t_lem_in *lem);
 void				lem_is_duplicate_link(t_lem_in *lem,
@@ -87,9 +112,9 @@ void				lem_path_mem(t_path **path);
 t_link				*lem_get_static_links(t_path *paths, int size);
 void				lem_link_add(t_link **links, char *name, int x, int y);
 
+void				lem_push_ants(t_lem_in *lem);
 void				lem_paths_sort(t_path **paths);
 void				lem_links_reverse(t_link **links);
 t_node				*lem_get_node_by_name(t_node *rooms, char *name);
-t_node				*lem_get_close_node_to_end(t_lem_in *lem, t_link *links);
 
 #endif

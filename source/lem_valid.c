@@ -12,15 +12,22 @@
 
 #include "lem_in.h"
 
-void		lem_is_command(t_lem_in *lem)
+int			lem_is_command(t_lem_in *lem)
 {
 	if ((lem->flag_stage == 1 && !ft_strcmp(lem->buf, "##start"))
 		|| (lem->flag_stage == 1 && !ft_strcmp(lem->buf, "##end")))
 		lem_free_exit("No ants", lem);
 	if (!ft_strcmp(lem->buf, "##start"))
+	{
 		lem->flag_start = 1;
+		return (1);
+	}
 	else if (!ft_strcmp(lem->buf, "##end"))
+	{
 		lem->flag_end = 1;
+		return (1);
+	}
+	return (0);
 }
 
 int			lem_is_links_stage(t_lem_in *lem)

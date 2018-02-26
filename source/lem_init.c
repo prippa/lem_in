@@ -12,9 +12,22 @@
 
 #include "lem_in.h"
 
+void	lem_visualizer_init(t_visualizer *vis)
+{
+	vis->board = NULL;
+	vis->y = 0;
+	vis->x = 0;
+	vis->i = 0;
+	vis->j = 0;
+}
+
 void	lem_init(t_lem_in *lem)
 {
-	lem->ants = 0;
+	lem->ants = 1;
+	lem->ants_count = 0;
+	lem->end_ants = 0;
+	lem->count_node = 0;
+	lem->count_steps = 0;
 	lem->rooms = NULL;
 	lem->start = NULL;
 	lem->end = NULL;
@@ -27,6 +40,8 @@ void	lem_init(t_lem_in *lem)
 	lem->arr = NULL;
 	lem->buf = NULL;
 	lem->line_number = 1;
+	ft_bzero(lem->flags, FLAG_SIZE);
+	lem_visualizer_init(&lem->vis);
 }
 
 void	lem_init_start_end(t_lem_in *lem)

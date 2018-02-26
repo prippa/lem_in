@@ -12,6 +12,33 @@
 
 #include "lem_in.h"
 
+void		lem_push_ants(t_lem_in *lem)
+{
+	t_path	*temp_paths;
+	t_link	*temp_links;
+	int		pull;
+	int		tmp;
+
+	temp_paths = lem->paths;
+	while (temp_paths)
+	{
+		temp_links = temp_paths->links;
+		pull = lem->ants;
+		while (temp_links)
+		{
+			tmp = temp_links->ant;
+			temp_links->ant = pull;
+			pull = tmp;
+			temp_links = temp_links->next;
+		}
+		temp_paths = temp_paths->next;
+		if (lem->ants == lem->ants_count)
+			lem->ants = 0;
+		else if (lem->ants)
+			lem->ants++;
+	}
+}
+
 static void	len_paths_swap(t_path **left, t_path **right)
 {
 	t_link	*temp_links;
@@ -79,27 +106,4 @@ t_node		*lem_get_node_by_name(t_node *rooms, char *name)
 		rooms = rooms->next;
 	}
 	return (NULL);
-}
-
-t_node		*lem_get_close_node_to_end(t_lem_in *lem, t_link *links)
-{
-	t_link	*close_in;
-	int		sum;
-	int		tmp;
-
-	close_in = links;
-	sum = ABS(lem->end->x - links->x) + ABS(lem->end->y - links->y);
-	links = links->next;
-	while (links)
-	{
-		tmp = ABS(lem->end->x - links->x) + ABS(lem->end->y - links->y);
-		if ((sum && lem->end->y == links->y)
-			|| (tmp < sum && close_in->y != lem->end->y))
-		{
-			sum = tmp;
-			close_in = links;
-		}
-		links = links->next;
-	}
-	return (lem_get_node_by_name(lem->rooms, close_in->name));
 }

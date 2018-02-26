@@ -81,6 +81,29 @@ static void		lem_paths_add(t_lem_in *lem, t_node **temp_node)
 		lem->start->x, lem->start->y);
 }
 
+static t_node	*lem_get_close_node_to_end(t_lem_in *lem, t_link *links)
+{
+	t_link	*close_in;
+	int		sum;
+	int		tmp;
+
+	close_in = links;
+	sum = ABS(lem->end->x - links->x) + ABS(lem->end->y - links->y);
+	links = links->next;
+	while (links)
+	{
+		tmp = ABS(lem->end->x - links->x) + ABS(lem->end->y - links->y);
+		if ((sum && lem->end->y == links->y)
+			|| (tmp < sum && close_in->y != lem->end->y))
+		{
+			sum = tmp;
+			close_in = links;
+		}
+		links = links->next;
+	}
+	return (lem_get_node_by_name(lem->rooms, close_in->name));
+}
+
 void			lem_get_paths(t_lem_in *lem)
 {
 	t_node	*temp_node;
