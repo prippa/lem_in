@@ -43,7 +43,6 @@ static void	lem_print_paths(t_lem_in *lem)
 		lem_print_path(paths->links);
 		paths = paths->next;
 	}
-	ft_putchar('\n');
 }
 
 void		lem_debuger(t_lem_in *lem)
@@ -63,6 +62,6 @@ void		lem_debuger(t_lem_in *lem)
 		}
 		if (lem->flags[F_DEBUG_ALL_PATHS])
 			lem_print_paths(lem);
-		ft_putstr("---------------------------------------\n");
+		ft_putstr("\n---------------------------------------\n");
 	}
 }

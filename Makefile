@@ -12,7 +12,7 @@
 
 NAME		=	lem-in
 
-#FLAGS		= 	-Wall -Werror -Wextra
+FLAGS		= 	-Wall -Werror -Wextra
 
 CC			=	gcc
 
@@ -28,7 +28,7 @@ HEAD_LEM	=	lem_in.h
 C_LEM		=	main.c lem_init.c lem_parser.c\
 				lem_get_paths.c lem_print_ants_travel.c\
 				lem_valid.c lem_debuger.c lem_visualizer.c\
-				lem_trash.c lem_free.c\
+				lem_trash.c lem_free.c lem_visu_draw_pipes.c\
 				lem_list_mem.c lem_list_operations.c
 
 

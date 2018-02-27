@@ -12,9 +12,6 @@
 
 #include "lem_in.h"
 
-#define Y lem->vis.i
-#define X lem->vis.j
-
 void		lem_vis_fill_board2(t_lem_in *lem, t_path *paths, t_link *links)
 {
 	lem->way_ants = 0;
@@ -28,11 +25,10 @@ void		lem_vis_fill_board2(t_lem_in *lem, t_path *paths, t_link *links)
 				if (links->x == lem->end->x && links->y == lem->end->y)
 					lem->end_ants++;
 				else
-				{
 					lem->way_ants++;
-					lem->flag_end = 1;
-				}
-				lem->vis.board[links->y][links->x] = (links->ant - 1 % 26) + 65;
+				lem->vis.board[links->y][links->x] =
+				((links->ant - 1) % 26) + 65;
+				lem->flag_end = 1;
 			}
 			links = links->next;
 		}
@@ -50,9 +46,9 @@ void		lem_vis_fill_board(t_lem_in *lem)
 		lem->vis.board[node->y][node->x] = '*';
 		node = node->next;
 	}
-	lem_vis_fill_board2(lem, lem->paths, NULL);
 	lem->vis.board[lem->start->y][lem->start->x] = '!';
 	lem->vis.board[lem->end->y][lem->end->x] = '?';
+	lem_vis_fill_board2(lem, lem->paths, NULL);
 }
 
 void		lem_vis_print_board(t_lem_in *lem)
@@ -64,12 +60,10 @@ void		lem_vis_print_board(t_lem_in *lem)
 		while (lem->vis.board[Y][X])
 		{
 			if (ft_isuppercase(lem->vis.board[Y][X]))
-				ft_printf("%~c", lem->vis.board[Y][X] % 5, lem->vis.board[Y][X]);
-			else if (lem->vis.board[Y][X] == '.')
-				ft_putchar(' ');
-			else if (lem->vis.board[Y][X] == '!')
-				ft_printf("%~c", F_YELLOW, lem->vis.board[Y][X]);
-			else if (lem->vis.board[Y][X] == '?')
+				ft_printf("\e[43m%~c\e[49m", F_RED, lem->vis.board[Y][X]);
+			else if (lem->vis.board[Y][X] == '!' || lem->vis.board[Y][X] == '?')
+				ft_printf("\e[44m%c\e[49m", lem->vis.board[Y][X]);
+			else if (lem->vis.board[Y][X] == '*')
 				ft_printf("%~c", F_RED, lem->vis.board[Y][X]);
 			else
 				ft_printf("%c", lem->vis.board[Y][X]);
@@ -99,18 +93,18 @@ void		lem_vis_board_mem(t_lem_in *lem)
 			lem->vis.y = temp_node->y;
 		temp_node = temp_node->next;
 	}
-	lem->vis.board = ft_arrnew(lem->vis.y + 1, lem->vis.x + 1, '.');
+	lem->vis.board = ft_arrnew(lem->vis.y + 1, lem->vis.x + 1, ' ');
 }
 
 int			lem_visualizer(t_lem_in *lem)
 {
-	t_visualizer	vis;
-	char			*line;
-
 	ft_clear();
 	lem->flag_end = 0;
 	if (!lem->vis.board)
+	{
 		lem_vis_board_mem(lem);
+		lem_visu_draw_pipes(lem);
+	}
 	lem_vis_fill_board(lem);
 	lem_vis_print_board(lem);
 	read(1, 0, 1);

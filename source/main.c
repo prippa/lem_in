@@ -25,7 +25,7 @@ void		lem_get_bonus_flags(t_lem_in *lem, char **argv)
 			lem->flags[F_DEBUG_ALL_PATHS] = '$';
 		else if (!ft_strcmp(argv[i], "-loc"))
 			lem->flags[F_DEBUG_ANT_STATUS] = '$';
-		else if (!ft_strcmp(argv[i], "-step"))
+		else if (!ft_strcmp(argv[i], "-steps"))
 			lem->flags[F_DEBUG_COUNT_STEPS] = '$';
 		else if (!ft_strcmp(argv[i], "-rooms"))
 			lem->flags[F_DEBUG_COUNT_NODE] = '$';
@@ -34,7 +34,7 @@ void		lem_get_bonus_flags(t_lem_in *lem, char **argv)
 		else
 		{
 			ft_putstr_fd("ERROR: Invalid flag\n", 2);
-			ft_putstr_fd("usage: [-visu -paths -path -loc -step -rooms]\n", 2);
+			ft_putstr_fd("usage: [-visu -loc -paths -path -steps -rooms]\n", 2);
 			exit(0);
 		}
 		i++;
@@ -53,6 +53,5 @@ int			main(int argc, char **argv)
 	lem_paths_sort(&lem.paths);
 	lem_print_ants_travel(&lem);
 	lem_free(&lem);
-	system("leaks lem-in");
 	return (0);
 }

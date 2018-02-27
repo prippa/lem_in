@@ -17,6 +17,10 @@ void	lem_visualizer_init(t_visualizer *vis)
 	vis->board = NULL;
 	vis->y = 0;
 	vis->x = 0;
+	vis->dy = 0;
+	vis->dx = 0;
+	vis->sy = 0;
+	vis->sx = 0;
 	vis->i = 0;
 	vis->j = 0;
 }
