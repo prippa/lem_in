@@ -25,15 +25,15 @@
 # define F_DEBUG_COUNT_STEPS	4
 # define F_DEBUG_COUNT_NODE		5
 
-#define Y lem->vis.i
-#define X lem->vis.j
+# define Y lem->vis.i
+# define X lem->vis.j
 
 typedef	struct		s_link
 {
 	char			*name;
 	int				x;
 	int				y;
-	int 			ant;
+	int				ant;
 	struct s_link	*next;
 }					t_link;
 
@@ -87,7 +87,7 @@ typedef	struct		s_lem_in
 	char			*buf;
 	char			flags[FLAG_SIZE];
 	int				line_number;
-	t_visualizer 	vis;
+	t_visualizer	vis;
 }					t_lem_in;
 
 void				lem_visu_draw_pipes(t_lem_in *lem);

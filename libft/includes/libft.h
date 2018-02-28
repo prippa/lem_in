@@ -17,8 +17,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-# define 			BUFF_SIZE 32
-# define 			ABS(x) (((x) < 0) ? -(x) : (x))
+# define BUFF_SIZE 32
+# define ABS(x) (((x) < 0) ? -(x) : (x))
 
 typedef	struct		s_gnl
 {

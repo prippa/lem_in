@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem_visu_draw_pipes.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prippa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 12:13:08 by prippa            #+#    #+#             */
+/*   Updated: 2018/02/28 12:13:10 by prippa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 static char	lem_visu_get_right_pipe(int old_x, int old_y, int new_x, int new_y)
@@ -17,10 +29,10 @@ static char	lem_visu_get_right_pipe(int old_x, int old_y, int new_x, int new_y)
 	return (c);
 }
 
-static void		lem_visu_op(t_lem_in *lem, int e2, int *err)
+static void	lem_visu_op(t_lem_in *lem, int e2, int *err)
 {
 	if (e2 > -lem->vis.dx)
-	{ 
+	{
 		*err -= lem->vis.dy;
 		X += lem->vis.sx;
 	}
@@ -31,7 +43,7 @@ static void		lem_visu_op(t_lem_in *lem, int e2, int *err)
 	}
 }
 
-static void		lem_visu_draw_pipe(t_lem_in *lem, t_node *from, t_link *to)
+static void	lem_visu_draw_pipe(t_lem_in *lem, t_node *from, t_link *to)
 {
 	int		err;
 	int		e2;
